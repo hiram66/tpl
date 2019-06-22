@@ -78,7 +78,6 @@ func TestTaskFrom_WhenTaskHasOutput(t *testing.T) {
 		break
 	default:
 		log.Fatalf("expected type is %s",reflect.TypeOf(1).String())
-		
 	}
 
 	if result[0].(int) != testData * 2 {
@@ -150,7 +149,7 @@ func TestTaskFrom_WhenInputIsNotFunction_FunctionShouldPanic(t *testing.T) {
 
 	_ = TaskFrom("wrong", 1, 1)
 
-	log.Fatalf("function shoulf have been paniced before")
+	log.Fatalf("EXPECTED PANIC")
 }
 
 func TestTaskFrom_WhenTaskIsFinished_StatusShouldBeAsExpected(t *testing.T) {
