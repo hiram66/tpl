@@ -15,9 +15,9 @@ type TaskGroup interface {
 
 	GetTaskState(tag string) (TaskStatus, error)
 
-	GetResults() map[string]interface{}
+	GetResults() map[string][]interface{}
 
-	GetTaskResult(tag string) (interface{}, error)
+	GetTaskResult(tag string) ([]interface{}, error)
 }
 
 type taskGroup map[string]Task
@@ -68,14 +68,13 @@ func (tg taskGroup) GetTaskState(tag string) (TaskStatus, error) {
 	if ok {
 		return t.Status(), nil
 	}
-	return 1, errors.New("task does not exists")
+	return -1, errors.New("task does not exists")
 }
 
-func (tg taskGroup) GetResults() map[string]interface{} {
-	tg.WaitAll()
-	result := make(map[string]interface{})
+func (tg taskGroup) GetResults() map[string][]interface{} {
+	result := make(map[string][]interface{})
 	for tag, task := range tg {
-		if len(task.Result()) > 0 {
+		if len(task.Result()) >= 0 {
 			result[tag] = task.Result()
 		}
 	}
@@ -83,10 +82,9 @@ func (tg taskGroup) GetResults() map[string]interface{} {
 	return result
 }
 
-func (tg taskGroup) GetTaskResult(tag string) (interface{}, error) {
+func (tg taskGroup) GetTaskResult(tag string) ([]interface{}, error) {
 	t, ok := tg[tag]
 	if ok {
-		t.Wait()
 		return t.Result(), nil
 	}
 	return nil, errors.New("task does not exists")

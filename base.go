@@ -61,7 +61,6 @@ func (t *dTask) Wait() {
 }
 
 func (t *dTask) Result() []interface{} {
-	t.Wait()
 	return t.result
 }
 
