@@ -2,7 +2,7 @@ package tpl
 
 import (
 	"fmt"
-	"github.com/labstack/gommon/log"
+	"log"
 	"math/rand"
 	"reflect"
 	"testing"
@@ -289,7 +289,6 @@ func TestTaskGroup_GetState_WhenTasksAreNotFinished(t *testing.T) {
 	}
 }
 
-// TODO * 2
 func TestTaskGroup_RunTask(t *testing.T) {
 	tasks := make([]Task, 0)
 	fn := func(s string) {

@@ -143,8 +143,7 @@ func TestTaskFrom_WhenNotifierExists(t *testing.T) {
 
 func TestTaskFrom_WhenInputIsNotFunction_FunctionShouldPanic(t *testing.T) {
 	defer func() {
-		e := recover()
-		fmt.Println(e)
+		_ = recover()
 	}()
 
 	_ = TaskFrom("wrong", 1, 1)
